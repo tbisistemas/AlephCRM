@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<test-results name="D:\Arquivos\FD\Fontes\TBISistemas\AlephCRM\Test\bin\Win32\Debug\TestAlephCRM.exe" total="2" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2022-04-05" time="54.476">
+  <culture-info current-culture="en" current-uiculture="en" />
+  <test-suite type="Assembly" name="TestAlephCRM.exe" executed="true" result="Success" success="True" time="54.476" asserts="0">
+    <results>
+        <test-suite type="Namespace" name="TestAlephCRM" executed="true" result="Success" success="True" time="54.475" asserts="0" >
+          <results>
+              <test-suite type="Namespace" name="Services" executed="true" result="Success" success="True" time="54.475" asserts="0" >
+                <results>
+                    <test-suite type="Fixture" name="TestAlephProductService" executed="True" result="Success" success="True" time="37.953" >
+                      <results>
+                        <test-case name="TestGetProducts" executed="True" result="Success" success="True" time="37.953" asserts="0" />
+                      </results>
+                    </test-suite>
+                    <test-suite type="Fixture" name="TestAlephAccountService" executed="True" result="Success" success="True" time="16.522" >
+                      <results>
+                        <test-case name="TestGetAccount" executed="True" result="Success" success="True" time="16.522" asserts="0" />
+                      </results>
+                    </test-suite>
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+    </results>
+  </test-suite>
+</test-results>

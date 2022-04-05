@@ -1,0 +1,11 @@
+{
+	"name": "AlephCRM",
+	"description": "Integração com a plataforma AlephCRM.",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"https://github.com/viniciussanchez/restrequest4delphi": "^v3.0.17"
+	}
+}

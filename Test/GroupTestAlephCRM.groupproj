@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BAC17D85-0A19-4D87-A64E-9C4B5F8AA869}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TestAlephCRM.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TestAlephCRM">
+        <MSBuild Projects="TestAlephCRM.dproj"/>
+    </Target>
+    <Target Name="TestAlephCRM:Clean">
+        <MSBuild Projects="TestAlephCRM.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestAlephCRM:Make">
+        <MSBuild Projects="TestAlephCRM.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TestAlephCRM"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TestAlephCRM:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TestAlephCRM:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
