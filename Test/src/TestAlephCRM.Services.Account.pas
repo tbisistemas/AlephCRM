@@ -5,7 +5,7 @@ interface
 uses
   DUnitX.TestFramework,
   SysUtils,
-  AlephCRM.Services.Account,
+  AlephCRM.Services,
   AlephCRM.Models.ListResult,
   AlephCRM.Models.Account;
 
@@ -14,7 +14,7 @@ type
   [TestFixture]
   TestAlephAccountService = class(TObject)
   strict private
-    FAlephAccount: IAlephAccount;
+    FAlephCRM: IAlephCRM;
   public
     [Setup]
     procedure Setup;
@@ -30,19 +30,19 @@ uses AlephCRM.Providers.Authentication;
 
 procedure TestAlephAccountService.Setup;
 begin
-  FAlephAccount := TAlephAccountService.New;
+  FAlephCRM := TAlephCRM.New;
 end;
 
 procedure TestAlephAccountService.TearDown;
 begin
-  FAlephAccount := nil;
+  FAlephCRM := nil;
 end;
 
 procedure TestAlephAccountService.TestGetAccount;
 var
   LResult: TAlephListResult<TAlephAccount>;
 begin
-  LResult := FAlephAccount.Get;
+  LResult := FAlephCRM.Accounts.Get;
   Assert.IsTrue(Assigned(LResult));
   Assert.AreEqual(TAlephAuthentication.GetInstance.AccountId.ToInteger, LResult.Results[0].Id);
 end;

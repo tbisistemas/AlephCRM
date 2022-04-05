@@ -25,7 +25,8 @@ uses
   AlephCRM.Models.ListResult in '..\src\models\AlephCRM.Models.ListResult.pas',
   AlephCRM.Models.SortField in '..\src\models\AlephCRM.Models.SortField.pas',
   AlephCRM.Services.ProductCatalog in '..\src\services\AlephCRM.Services.ProductCatalog.pas',
-  TestAlephCRM.Services.ProductCatalog in 'src\TestAlephCRM.Services.ProductCatalog.pas';
+  TestAlephCRM.Services.ProductCatalog in 'src\TestAlephCRM.Services.ProductCatalog.pas',
+  AlephCRM.Services in '..\src\services\AlephCRM.Services.pas';
 
 var
   runner : ITestRunner;

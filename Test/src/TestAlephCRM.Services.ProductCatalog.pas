@@ -6,7 +6,7 @@ uses
   DUnitX.TestFramework,
   SysUtils,
   AlephCRM.Models.ProductCatalog,
-  AlephCRM.Services.ProductCatalog,
+  AlephCRM.Services,
   AlephCRM.Models.ListResultPaging;
 
 type
@@ -14,7 +14,7 @@ type
   [TestFixture]
   TestAlephProductService = class(TObject)
   private
-    FAlephProduct: IAlephProductCatalog;
+    FAlephCRM: IAlephCRM;
   public
     [Setup]
     procedure Setup;
@@ -29,19 +29,19 @@ implementation
 
 procedure TestAlephProductService.Setup;
 begin
-  FAlephProduct := TAlephProductCatalogService.New;
+  FAlephCRM := TAlephCRM.New;
 end;
 
 procedure TestAlephProductService.TearDown;
 begin
-  FAlephProduct := nil;
+  FAlephCRM := nil;
 end;
 
 procedure TestAlephProductService.TestGetProducts;
 var
   LResult: TAlephListResultPaging<TAlephProductCatalog>;
 begin
-  LResult := FAlephProduct.Get;
+  LResult := FAlephCRM.ProductsCatalog.Get;
   Assert.IsTrue(Assigned(LResult));
 end;
 
