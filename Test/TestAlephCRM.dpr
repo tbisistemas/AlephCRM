@@ -26,7 +26,13 @@ uses
   AlephCRM.Models.SortField in '..\src\models\AlephCRM.Models.SortField.pas',
   AlephCRM.Services.ProductCatalog in '..\src\services\AlephCRM.Services.ProductCatalog.pas',
   TestAlephCRM.Services.ProductCatalog in 'src\TestAlephCRM.Services.ProductCatalog.pas',
-  AlephCRM.Services in '..\src\services\AlephCRM.Services.pas';
+  AlephCRM.Services in '..\src\services\AlephCRM.Services.pas',
+  AlephCRM.Models.Products.ActionResult in '..\src\models\AlephCRM.Models.Products.ActionResult.pas',
+  AlephCRM.Providers.ProductUpdateRequest in '..\src\providers\AlephCRM.Providers.ProductUpdateRequest.pas',
+  AlephCRM.Services.ProductUpdate in '..\src\services\AlephCRM.Services.ProductUpdate.pas',
+  TestAlephCRM.Services.ProductUpdate in 'src\TestAlephCRM.Services.ProductUpdate.pas',
+  AlephCRM.Models.Products.Update in '..\src\models\AlephCRM.Models.Products.Update.pas',
+  Infra.HTTPRestClient in '..\src\utils\Infra.HTTPRestClient.pas';
 
 var
   runner : ITestRunner;

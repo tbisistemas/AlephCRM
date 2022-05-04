@@ -2,27 +2,42 @@ unit AlephCRM.Models.ListResult;
 
 interface
 
+uses
+  Generics.Collections;
+
+{$M+}
+
 type
   TAlephListResult<T: class> = class
   strict private
-    FResults: TArray<T>;
+    FResults: TList<T>;
     FTotal: Integer;
   public
+    constructor Create;
     destructor Destroy; override;
+
+  published
     property Total: Integer read FTotal write FTotal;
-    property Results: TArray<T> read FResults write FResults;
+    property Results: TList<T> read FResults write FResults;
   end;
 
 implementation
 
 { TAlephListResult<T> }
 
+constructor TAlephListResult<T>.Create;
+begin
+  FResults := TList<T>.Create;
+end;
+
 destructor TAlephListResult<T>.Destroy;
 var
-  LAlephResult: T;
+  LResult: T;
 begin
-  for LAlephResult in Results do
-    LAlephResult.Free;
+  for LResult in FResults do
+    LResult.Free;
+  FResults.Free;
+
   inherited;
 end;
 

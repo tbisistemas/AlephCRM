@@ -20,7 +20,6 @@ type
     function Limit(const ALimit: Integer): IAlephProductCatalog;
     function Get: TAlephListResultPaging<TAlephProductCatalog>;
 
-
   end;
 
   TAlephProductCatalogService = class(TInterfacedObject, IAlephProductCatalog)
@@ -36,7 +35,7 @@ type
     FOwnCode: string;
 
   private
-    { IAlephProduct implementation }
+    { IAlephProductCatalog implementation }
     function Sku(const ASku: string): IAlephProductCatalog;
     function Brand(const ABrand: string): IAlephProductCatalog;
     function OwnCode(const AOwnCode: string): IAlephProductCatalog;
@@ -92,8 +91,7 @@ function TAlephProductCatalogService.Get: TAlephListResultPaging<TAlephProductCa
 var
   LRequest: IAlephRequest<TAlephListResultPaging<TAlephProductCatalog>>;
 begin
-  LRequest := TAlephRequest < TAlephListResultPaging < TAlephProductCatalog >>.New
-    .Resource(PATH_PRODUCT);
+  LRequest := TAlephRequest < TAlephListResultPaging < TAlephProductCatalog >>.New.Resource(PATH_PRODUCT);
 
   if not FSku.Trim.IsEmpty then
     LRequest.AddQueryParam('Sku', FSku);
@@ -103,7 +101,7 @@ begin
     LRequest.AddQueryParam('ownCode', FOwnCode);
   if not FPriceListId > 0 then
     LRequest.AddQueryParam('priceListId', FPriceListId.ToString);
-  if not (FDateUpdateFrom > 0) then
+  if not(FDateUpdateFrom > 0) then
     LRequest.AddQueryParam('dateUpdateFrom', FormatDateTime('yyyy-mm-dd hh:nn', FDateUpdateFrom));
   if not FCatalogStatus.Trim.IsEmpty then
     LRequest.AddQueryParam('catalogStatus', FCatalogStatus);

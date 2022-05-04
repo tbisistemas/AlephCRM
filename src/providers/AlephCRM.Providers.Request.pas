@@ -2,41 +2,51 @@ unit AlephCRM.Providers.Request;
 
 interface
 
-uses RESTRequest4D;
+uses
+  System.SysUtils,
+  System.JSON,
+  System.Rtti,
+  Generics.Collections,
+  Neon.Core.Persistence,
+  Neon.Core.Persistence.JSON,
+  Infra.HTTPRestClient;
 
 type
   IAlephRequest<T: class, constructor> = interface
     ['{608FFCB3-DE41-4BD6-97DB-0989DA56816B}']
-    function ResourceSuffix(const AResourceSuffix: Integer): IAlephRequest<T>;
+    function ResourcePrefix(const AResourcePrefix: string): IAlephRequest<T>;
+    function ResourceSuffix(const AResourceSuffix: string): IAlephRequest<T>;
     function Resource(const AResource: string): IAlephRequest<T>;
     function AddQueryParam(const AName, AValue: string): IAlephRequest<T>;
     function ClearQueryParams: IAlephRequest<T>;
-    function Post(const AObject: T): T;
     function Get: T;
   end;
 
   TAlephRequest<T: class, constructor> = class(TInterfacedObject, IAlephRequest<T>)
   private
-    FRequest: IRequest;
-    function ResourceSuffix(const AResourceSuffix: Integer): IAlephRequest<T>;
+  protected
+    FRestClient: TInfraHTTPRestClient;
+    FNeonConfig: INeonConfiguration;
+    function ResourcePrefix(const AResourcePrefix: string): IAlephRequest<T>;
+    function ResourceSuffix(const AResourceSuffix: string): IAlephRequest<T>;
     function Resource(const AResource: string): IAlephRequest<T>;
     function AddQueryParam(const AName, AValue: string): IAlephRequest<T>;
     function ClearQueryParams: IAlephRequest<T>;
-    function Post(const AObject: T): T;
     function Get: T;
+
     procedure _SetupAuthentication;
   public
-    constructor Create;
+    constructor Create; virtual;
+    destructor Destroy; override;
     class function New: IAlephRequest<T>;
   end;
 
 implementation
 
 uses
+  Neon.Core.Types,
+  Neon.Core.Utils,
   AlephCRM.Providers.Consts,
-  System.SysUtils,
-  REST.Json,
-  System.Json,
   AlephCRM.Providers.Authentication,
   System.Generics.Collections;
 
@@ -44,41 +54,43 @@ uses
 
 function TAlephRequest<T>.AddQueryParam(const AName, AValue: string): IAlephRequest<T>;
 begin
-  FRequest.AddParam(AName, AValue);
+  FRestClient.Request.AddParam(AName, AValue);
   Result := Self;
 end;
 
 function TAlephRequest<T>.ClearQueryParams: IAlephRequest<T>;
 begin
-  FRequest.ClearParams;
+  FRestClient.Request.ClearParams;
   Result := Self;
 end;
 
 constructor TAlephRequest<T>.Create;
 begin
-  FRequest := TRequest.New
-    .ContentType(APPLICATION_JSON)
-    .BaseURL(BASE_URL);
+  FRestClient := TInfraHTTPRestClient.Create;
+  FRestClient.Request.BaseURL(BASE_URL);
+  FNeonConfig := TNeonConfiguration.Default;
+  FNeonConfig.SetMembers([TNeonMembers.Standard, TNeonMembers.Fields, TNeonMembers.Properties]);
   _SetupAuthentication;
 end;
 
-function TAlephRequest<T>.Get: T;
-var
-  LResponse: IResponse;
+destructor TAlephRequest<T>.Destroy;
 begin
-  LResponse := FRequest.Get;
-  if LResponse.StatusCode = 401 then
+  FRestClient.Free;
+  inherited;
+end;
+
+function TAlephRequest<T>.Get: T;
+begin
+  FRestClient.Request.Get;
+  if FRestClient.Response.StatusCode = 401 then
   begin
     _SetupAuthentication;
     Result := Self.Get;
     Exit;
   end;
-  if LResponse.StatusCode <> 200 then
-    raise Exception.Create(LResponse.Content);
-  if FRequest.ResourceSuffix.Trim.IsEmpty then
-    Result := TJson.JsonToObject<T>(LResponse.Content)
-  else
-    Result := TJson.JsonToObject<T>(LResponse.JSONValue.GetValue<TJSONArray>('result').Items[0] as TJSONObject);
+  if FRestClient.Response.StatusCode <> 200 then
+    raise Exception.Create(FRestClient.Response.Content);
+  Result := TNeon.JsonToObject<T>(FRestClient.Response.JSONValue, FNeonConfig)
 end;
 
 class function TAlephRequest<T>.New: IAlephRequest<T>;
@@ -88,38 +100,27 @@ end;
 
 procedure TAlephRequest<T>._SetupAuthentication;
 begin
-  FRequest.AddParam('api_key', TAlephAuthentication.GetInstance.ApiKey);
-  FRequest.AddParam('accountId', TAlephAuthentication.GetInstance.AccountId);
-end;
-
-function TAlephRequest<T>.Post(const AObject: T): T;
-var
-  LResponse: IResponse;
-begin
-  if Assigned(AObject) then
-    FRequest.ClearBody.AddBody(AObject);
-  LResponse := FRequest.Post;
-  if LResponse.StatusCode = 401 then
-  begin
-    _SetupAuthentication;
-    Result := Self.Post(nil);
-    Exit;
-  end;
-  if LResponse.StatusCode <> 200 then
-    raise Exception.Create(LResponse.Content);
-  Result := TJson.JsonToObject<T>(LResponse.JSONValue.GetValue<TJSONArray>('result').Items[0] as TJSONObject);
+  FRestClient.Request
+    .AddParam('api_key', TAlephAuthentication.GetInstance.ApiKey)
+    .AddParam('accountId', TAlephAuthentication.GetInstance.AccountId);
 end;
 
 function TAlephRequest<T>.Resource(const AResource: string): IAlephRequest<T>;
 begin
-  FRequest.Resource(AResource);
   Result := Self;
+  FRestClient.Request.Resource(AResource);
 end;
 
-function TAlephRequest<T>.ResourceSuffix(const AResourceSuffix: Integer): IAlephRequest<T>;
+function TAlephRequest<T>.ResourcePrefix(const AResourcePrefix: string): IAlephRequest<T>;
 begin
-  FRequest.ResourceSuffix(AResourceSuffix.ToString);
   Result := Self;
+  FRestClient.Request.ResourcePrefix(AResourcePrefix);
+end;
+
+function TAlephRequest<T>.ResourceSuffix(const AResourceSuffix: string): IAlephRequest<T>;
+begin
+  Result := Self;
+  FRestClient.Request.ResourceSuffix(AResourceSuffix);
 end;
 
 end.

@@ -10,10 +10,10 @@
 			"failed": false,
 			"changed": false
 		},
-		"https://github.com/viniciussanchez/restrequest4delphi": {
-			"name": "restrequest4delphi",
-			"version": "v3.0.17",
-			"hash": "ea60c6bd97447cd2f162911082301dac",
+		"https://github.com/paolo-rossi/delphi-neon": {
+			"name": "delphi-neon",
+			"version": "v1.7.0",
+			"hash": "d3b9d06bd595d8977d1844ab67a71449",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

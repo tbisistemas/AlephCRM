@@ -5,7 +5,6 @@ interface
 uses
   DUnitX.TestFramework,
   SysUtils,
-  AlephCRM.Models.ProductCatalog,
   AlephCRM.Services,
   AlephCRM.Models.ListResultPaging;
 

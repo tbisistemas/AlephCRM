@@ -6,6 +6,6 @@
 	"mainsrc": "./src",
 	"projects": [],
 	"dependencies": {
-		"https://github.com/viniciussanchez/restrequest4delphi": "^v3.0.17"
+		"https://github.com/paolo-rossi/delphi-neon": "^v1.7.0"
 	}
 }

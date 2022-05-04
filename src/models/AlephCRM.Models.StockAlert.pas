@@ -2,13 +2,15 @@ unit AlephCRM.Models.StockAlert;
 
 interface
 
+{$M+}
+
 type
-  TAlephStockAlert = class(TObject)
+  TAlephStockAlert = class
   private
     FRedQty: Integer;
     FYellowQty: Integer;
 
-  public
+  published
     property RedQty: Integer read FRedQty write FRedQty;
     property YellowQty: Integer read FYellowQty write FYellowQty;
 

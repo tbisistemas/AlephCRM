@@ -2,6 +2,8 @@ unit AlephCRM.Models.Paging;
 
 interface
 
+{$M+}
+
 type
 
   TAlephPaging = class
@@ -10,7 +12,7 @@ type
     FOffset: Integer;
     FTotal: Integer;
 
-  public
+  published
     property Limit: Integer read FLimit write FLimit;
     property Offset: Integer read FOffset write FOffset;
     property Total: Integer read FTotal write FTotal;
