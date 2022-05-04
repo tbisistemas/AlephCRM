@@ -2,10 +2,12 @@ unit AlephCRM.Models.Account;
 
 interface
 
+uses AlephCRM.Models.BaseModel;
+
 {$M+}
 
 type
-  TAlephAccount = class
+  TAlephAccount = class(TAlephBaseModel)
   private
     FId: Integer;
     FName: string;

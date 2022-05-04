@@ -3,12 +3,12 @@ unit AlephCRM.Models.ListResult;
 interface
 
 uses
-  Generics.Collections;
+  Generics.Collections, AlephCRM.Models.BaseModel;
 
 {$M+}
 
 type
-  TAlephListResult<T: class> = class
+  TAlephListResult<T: class> = class(TAlephBaseModel)
   strict private
     FResults: TList<T>;
     FTotal: Integer;

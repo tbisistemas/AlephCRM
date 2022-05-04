@@ -2,10 +2,12 @@ unit AlephCRM.Models.IdName;
 
 interface
 
+uses AlephCRM.Models.BaseModel;
+
 {$M+}
 
 type
-  TAlephIdName = class
+  TAlephIdName = class(TAlephBaseModel)
   private
     FId: Integer;
     FName: string;
@@ -14,7 +16,7 @@ type
     property Name: string read FName write FName;
   end;
 
-  TAlephKeyValue = class(TObject)
+  TAlephKeyValue = class(TAlephBaseModel)
   private
     FKey: Integer;
     FValue: string;

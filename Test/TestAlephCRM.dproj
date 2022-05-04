@@ -152,6 +152,8 @@
         <DCCReference Include="src\TestAlephCRM.Services.ProductUpdate.pas"/>
         <DCCReference Include="..\src\models\AlephCRM.Models.Products.Update.pas"/>
         <DCCReference Include="..\src\utils\Infra.HTTPRestClient.pas"/>
+        <DCCReference Include="..\src\models\AlephCRM.Models.BaseModel.pas"/>
+        <DCCReference Include="src\TestAlephCRM.Models.BaseModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -185,9 +187,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\Componentes\ACBr\Delphi10.3\DLLs\OpenSSL\1.0.2.21\x86\ssleay32.dll" Configuration="Release" Class="File">
+                <DeployFile LocalName="..\..\..\..\Componentes\ACBr\Delphi10.3\DLLs\OpenSSL\1.0.2.21\x86\libeay32.dll" Configuration="Release" Class="File">
                     <Platform Name="Win32">
-                        <RemoteName>ssleay32.dll</RemoteName>
+                        <RemoteName>libeay32.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -224,22 +226,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\..\Componentes\ACBr\Delphi10.3\DLLs\OpenSSL\1.0.2.21\x86\libeay32.dll" Configuration="Release" Class="File">
+                <DeployFile LocalName="..\..\..\..\Componentes\ACBr\Delphi10.3\DLLs\OpenSSL\1.0.2.21\x86\ssleay32.dll" Configuration="Release" Class="File">
                     <Platform Name="Win32">
-                        <RemoteName>libeay32.dll</RemoteName>
+                        <RemoteName>ssleay32.dll</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
                 <DeployClass Name="ProjectOSXResource">
                     <Platform Name="OSX32">
                         <RemoteDir>Contents\Resources</RemoteDir>
@@ -578,7 +571,16 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectiOSDeviceResourceRules"/>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>

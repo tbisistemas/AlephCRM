@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<test-results name="D:\Arquivos\FD\Fontes\TBISistemas\AlephCRM\Test\bin\Win32\Debug\TestAlephCRM.exe" total="3" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2022-05-04" time="74.908">
+<test-results name="D:\Arquivos\FD\Fontes\TBISistemas\AlephCRM\Test\bin\Win32\Debug\TestAlephCRM.exe" total="4" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2022-05-04" time="31.917">
   <culture-info current-culture="en" current-uiculture="en" />
-  <test-suite type="Assembly" name="TestAlephCRM.exe" executed="true" result="Success" success="True" time="74.908" asserts="0">
+  <test-suite type="Assembly" name="TestAlephCRM.exe" executed="true" result="Success" success="True" time="31.917" asserts="0">
     <results>
-        <test-suite type="Namespace" name="TestAlephCRM" executed="true" result="Success" success="True" time="74.908" asserts="0" >
+        <test-suite type="Namespace" name="TestAlephCRM" executed="true" result="Success" success="True" time="31.917" asserts="0" >
           <results>
-              <test-suite type="Namespace" name="Services" executed="true" result="Success" success="True" time="74.908" asserts="0" >
+              <test-suite type="Namespace" name="Services" executed="true" result="Success" success="True" time="29.291" asserts="0" >
                 <results>
-                    <test-suite type="Fixture" name="TestAlephAccountService" executed="True" result="Success" success="True" time="42.940" >
+                    <test-suite type="Fixture" name="TestAlephProductUpdateService" executed="True" result="Success" success="True" time="28.010" >
                       <results>
-                        <test-case name="TestGetAccount" executed="True" result="Success" success="True" time="42.940" asserts="0" />
+                        <test-case name="TestUpdateProducts" executed="True" result="Success" success="True" time="28.010" asserts="0" />
                       </results>
                     </test-suite>
-                    <test-suite type="Fixture" name="TestAlephProductUpdateService" executed="True" result="Success" success="True" time="18.675" >
+                    <test-suite type="Fixture" name="TestAlephProductService" executed="True" result="Success" success="True" time="1.039" >
                       <results>
-                        <test-case name="TestUpdateProducts" executed="True" result="Success" success="True" time="18.675" asserts="0" />
+                        <test-case name="TestGetProducts" executed="True" result="Success" success="True" time="1.038" asserts="0" />
                       </results>
                     </test-suite>
-                    <test-suite type="Fixture" name="TestAlephProductService" executed="True" result="Success" success="True" time="13.293" >
+                    <test-suite type="Fixture" name="TestAlephAccountService" executed="True" result="Success" success="True" time="0.242" >
                       <results>
-                        <test-case name="TestGetProducts" executed="True" result="Success" success="True" time="13.293" asserts="0" />
+                        <test-case name="TestGetAccount" executed="True" result="Success" success="True" time="0.242" asserts="0" />
                       </results>
                     </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="Fixture" name="TTestAlephBaseModel" executed="True" result="Success" success="True" time="2.626" >
+                <results>
+                  <test-case name="ConvertObjectToJson" executed="True" result="Success" success="True" time="2.626" asserts="0" />
                 </results>
               </test-suite>
           </results>

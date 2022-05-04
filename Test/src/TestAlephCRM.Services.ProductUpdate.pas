@@ -47,7 +47,6 @@ begin
   LProductUpdate := FAlephCRM.ProductsUpdate;
   LProductUpdateModel := TAlephProductUpdateModel.Create;
   LProductUpdateModel.SKU := 'F000.KE0.P43-T4E';
-  LProductUpdateModel.Stock := TAlephProductStockUpdate.Create;
   LProductUpdateModel.Stock.Quantity := 0;
 
   LProductUpdate.AddProduct(LProductUpdateModel);

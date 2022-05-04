@@ -4,7 +4,9 @@ interface
 
 uses
   Generics.Collections,
-  AlephCRM.Models.IdName, AlephCRM.Models.StockAlert;
+  AlephCRM.Models.IdName,
+  AlephCRM.Models.StockAlert,
+  AlephCRM.Models.BaseModel;
 
 {$M+}
 
@@ -17,7 +19,7 @@ type
   TAlephProductGroupedPublications = class;
   TAlephProductMeasurableQuantity = class;
 
-  TAlephProductCatalog = class
+  TAlephProductCatalog = class(TAlephBaseModel)
   strict private
     FIdentification: TAlephProductIdentification;
     FStock: TAlephProductStock;
@@ -35,11 +37,11 @@ type
     property Price: TList<TAlephProductPriceGet> read FPrice write FPrice;
     property Kits: TList<TAlephProductIdentification> read FKits write FKits;
     property KitComponents: TList<TAlephProductKitComponent> read FKitComponents write FKitComponents;
-    property publishedations: TList<TAlephProductGroupedPublications> read FPublications write FPublications;
+    property Publications: TList<TAlephProductGroupedPublications> read FPublications write FPublications;
 
   end;
 
-  TAlephProductIdentification = class
+  TAlephProductIdentification = class(TAlephBaseModel)
   strict private
     FId: Integer;
     FSKU: string;
@@ -55,18 +57,18 @@ type
     property Id: Integer read FId write FId;
     property SKU: string read FSKU write FSKU;
     property OwnCode: string read FOwnCode write FOwnCode;
-    property Name: string read FName write FName;
     property Brand: TAlephIdName read FBrand write FBrand;
+    property Name: string read FName write FName;
     property CatalogStatus: TAlephIdName read FCatalogStatus write FCatalogStatus;
 
   end;
 
-  TAlephProductStock = class
+  TAlephProductStock = class(TAlephBaseModel)
   private
     FQuantity: Integer;
     FPublishQuantity: Integer;
-    FMinpublishedationQuantity: Integer;
-    FMaxpublishedationQuantity: Integer;
+    FMinPublicationQuantity: Integer;
+    FMaxPublicationQuantity: Integer;
     FMovement: Integer;
     FB2BQuantity: Integer;
     FAlert: TAlephStockAlert;
@@ -81,13 +83,13 @@ type
     property Quantity: Integer read FQuantity write FQuantity;
     property PublishQuantity: Integer read FPublishQuantity write FPublishQuantity;
     property Alert: TAlephStockAlert read FAlert write FAlert;
-    property MinpublishedationQuantity: Integer read FMinpublishedationQuantity write FMinpublishedationQuantity;
-    property MaxpublishedationQuantity: Integer read FMaxpublishedationQuantity write FMaxpublishedationQuantity;
+    property MinPublicationQuantity: Integer read FMinPublicationQuantity write FMinPublicationQuantity;
+    property MaxPublicationQuantity: Integer read FMaxPublicationQuantity write FMaxPublicationQuantity;
     property MeasurableQuantity: TAlephProductMeasurableQuantity read FMeasurableQuantity write FMeasurableQuantity;
 
   end;
 
-  TAlephProductPriceGet = class
+  TAlephProductPriceGet = class(TAlephBaseModel)
   private
     FPrice: Double;
     FPriceWithTaxes: Double;
@@ -115,7 +117,7 @@ type
 
   end;
 
-  TAlephProductKitComponent = class
+  TAlephProductKitComponent = class(TAlephBaseModel)
   private
     FIdentification: TAlephProductIdentification;
     FPrice: TList<TAlephProductPriceGet>;
@@ -135,7 +137,7 @@ type
 
   end;
 
-  TAlephProductGroupedPublications = class
+  TAlephProductGroupedPublications = class(TAlephBaseModel)
   private
     FMarketPlace: TAlephKeyValue;
     FDetails: TList<TAlephIdName>;
@@ -149,7 +151,7 @@ type
 
   end;
 
-  TAlephProductMeasurableQuantity = class
+  TAlephProductMeasurableQuantity = class(TAlephBaseModel)
   private
     FQuantity: Double;
     FUnit: string;

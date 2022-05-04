@@ -2,10 +2,12 @@ unit AlephCRM.Models.StockAlert;
 
 interface
 
+uses AlephCRM.Models.BaseModel;
+
 {$M+}
 
 type
-  TAlephStockAlert = class
+  TAlephStockAlert = class(TAlephBaseModel)
   private
     FRedQty: Integer;
     FYellowQty: Integer;

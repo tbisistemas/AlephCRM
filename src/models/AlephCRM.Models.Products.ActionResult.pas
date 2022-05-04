@@ -4,7 +4,7 @@ interface
 
 uses
   Generics.Collections,
-  AlephCRM.Models.IdName;
+  AlephCRM.Models.IdName, AlephCRM.Models.BaseModel;
 
 {$M+}
 
@@ -15,7 +15,7 @@ type
   TAlephItemResult = class;
   TValidationMessage = class;
 
-  TAlephActionResult = class
+  TAlephActionResult = class(TAlephBaseModel)
   strict private
     FQuantities: TAlephActionResultQuantities;
     FItems: TList<TAlephItemResult>;
@@ -28,7 +28,7 @@ type
     property Items: TList<TAlephItemResult> read FItems write FItems;
   end;
 
-  TAlephActionResultQuantities = class
+  TAlephActionResultQuantities = class(TAlephBaseModel)
   strict private
     FOk: Integer;
     FError: Integer;
@@ -44,7 +44,7 @@ type
     property Total: Integer read FTotal write FTotal;
   end;
 
-  TAlephItemResult = class
+  TAlephItemResult = class(TAlephBaseModel)
   strict private
     FItemNumber: Integer;
     FValidationLevel: TAlephIdName;
@@ -63,7 +63,7 @@ type
     property Messages: TList<TValidationMessage> read FMessages write FMessages;
   end;
 
-  TValidationMessage = class
+  TValidationMessage = class(TAlephBaseModel)
   private
     FLevel: TAlephIdName;
     FCode: Integer;

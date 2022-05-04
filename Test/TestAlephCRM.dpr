@@ -32,7 +32,9 @@ uses
   AlephCRM.Services.ProductUpdate in '..\src\services\AlephCRM.Services.ProductUpdate.pas',
   TestAlephCRM.Services.ProductUpdate in 'src\TestAlephCRM.Services.ProductUpdate.pas',
   AlephCRM.Models.Products.Update in '..\src\models\AlephCRM.Models.Products.Update.pas',
-  Infra.HTTPRestClient in '..\src\utils\Infra.HTTPRestClient.pas';
+  Infra.HTTPRestClient in '..\src\utils\Infra.HTTPRestClient.pas',
+  AlephCRM.Models.BaseModel in '..\src\models\AlephCRM.Models.BaseModel.pas',
+  TestAlephCRM.Models.BaseModel in 'src\TestAlephCRM.Models.BaseModel.pas';
 
 var
   runner : ITestRunner;

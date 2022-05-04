@@ -4,10 +4,15 @@ interface
 
 uses
   Generics.Collections,
-  AlephCRM.Models.Paging, AlephCRM.Models.SortField;
+  AlephCRM.Models.Paging,
+  AlephCRM.Models.SortField,
+  AlephCRM.Models.BaseModel;
+
+{$M+}
+
 
 type
-  TAlephListResultPaging<T: class> = class
+  TAlephListResultPaging<T: class> = class(TAlephBaseModel)
   private
     FSortBy: TAlephSorField;
     FAvailableSorts: TList<TAlephSorField>;

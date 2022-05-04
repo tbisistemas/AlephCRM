@@ -2,11 +2,13 @@ unit AlephCRM.Models.Paging;
 
 interface
 
+uses AlephCRM.Models.BaseModel;
+
 {$M+}
 
 type
 
-  TAlephPaging = class
+  TAlephPaging = class(TAlephBaseModel)
   private
     FLimit: Integer;
     FOffset: Integer;

@@ -2,10 +2,12 @@ unit AlephCRM.Models.SortField;
 
 interface
 
+uses AlephCRM.Models.BaseModel;
+
 {$M+}
 
 type
-  TAlephSorField = class
+  TAlephSorField = class(TAlephBaseModel)
   private
     FId: string;
     FName: string;
